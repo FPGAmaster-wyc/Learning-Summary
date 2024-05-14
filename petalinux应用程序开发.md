@@ -1,87 +1,91 @@
-一、通过SDK开发应用程序
+# 一、通过SDK开发应用程序
 
-1.打开SDK，创建Linux app应用程序
+​	1.打开SDK，创建Linux app应用程序
 
-2.编写代码
+​	2.编写代码
 
-3.编译代码
+​	3.编译代码
 
-4.将可执行文件拷贝到开发板根文件系统去执行（/home/root）
+​	4.将可执行文件拷贝到开发板根文件系统去执行（/home/root）
 
-二、通过petalinux开发linux应用程序
 
-1\. 在petalinux工程下，创建app工程
 
-petalinux-create -t apps -n my-app --template c
+# 二、通过petalinux开发linux应用程序
 
-apps： 创建的类型为app
+​	1\. 在petalinux工程下，创建app工程
 
-my-app：应用程序的名字（不能出现“_”）
+​		petalinux-create -t apps -n my-app --template c
 
-c : 编程语言
+​			apps： 创建的类型为app
 
-2\. 编写代码
+​			my-app：应用程序的名字（不能出现“_”）
 
-产生的文件位置： v2018.3/11/my_zed/project-spec/meta-user/recipes-apps/my-app
+​			c : 编程语言
 
-进行代码编写（vim）：输入i进入编写，然后esc，输入“:wq”保存
+​	2\. 编写代码
 
-3\. 编译工程
+​		产生的文件位置： v2018.3/11/my_zed/project-spec/meta-user/recipes-apps/my-app
 
-petalinux-build -c my-app -x do_compile
+​		进行代码编写（vim）：输入i进入编写，然后esc，输入“:wq”保存
 
-my-app： 编译的应用程序名
+​	3\. 编译工程
 
-do_compile：进行编译
+​		petalinux-build -c my-app -x do_compile
 
-4\. 得到可执行文件
+​			my-app： 编译的应用程序名
 
-可执行文件：/build/tmp/work/cortexa9hf-neon-xilinx-linux-gnueabi/my-app/1.0-r0
+​			do_compile：进行编译
 
-5\. 在开发板运行
+​	4\. 得到可执行文件
 
-（1）通过scp命令（基于SSH协议），把可执行文件传递到开发板目录
+​		可执行文件：/build/tmp/work/cortexa9hf-neon-xilinx-linux-gnueabi/my-app/1.0-r0
 
-scp my-app [root@192.168.3.108:/home/root](mailto:root@192.168.3.108:/home/root)
+​	5\. 在开发板运行
 
-my-app： 可执行文件名
+​	（1）通过scp命令（基于SSH协议），把可执行文件传递到开发板目录
 
-[root@192.168.3.108](mailto:root@192.168.3.108)： 开发板ip
+​		scp my-app [root@192.168.3.108:/home/root](mailto:root@192.168.3.108:/home/root)
 
-/home/root： 开发板存放可执行文件路径
+​			my-app： 可执行文件名
 
-（2）通过挂载NFS网络文件系统 ：mount
+[			root@192.168.3.108](mailto:root@192.168.3.108)： 开发板ip
 
-1\. 在虚拟机搭建nfs系统
+​			/home/root： 开发板存放可执行文件路径
 
-sudo apt-get install nfs-kernel-server ：安装nfs系统
+​	（2）通过挂载NFS网络文件系统 ：mount
 
-sudo vi /etc/exports ：配置nfs系统
+​		1\. 在虚拟机搭建nfs系统
 
-内容：/home/zynq/linux/nfs \*(rw,sync,no_root_squash)
+​			sudo apt-get install nfs-kernel-server ：安装nfs系统
 
-/home/zynq/linux/nfs：创建nfs的路径（根据自己的更改）
+​			sudo vi /etc/exports ：配置nfs系统
 
-sudo service nfs-kernel-server restart ：重启nfs系统
+​			内容：	/home/zynq/linux/nfs \*(rw,sync,no_root_squash)
 
-2\. 把可执行文件拷贝到进去
+​					   /home/zynq/linux/nfs：创建nfs的路径（根据自己的更改）
 
-3\. 在开发板系统，进行挂载nfs
+​			sudo service nfs-kernel-server restart ：重启nfs系统
 
-mount -t nfs -o nolock 192.168.3.175:/home/hwusr/server/nfs /mnt
+​		2\. 把可执行文件拷贝到进去
 
-192.168.3.175:/home/hwusr/server/nfs：为虚拟机的nfs路径
+​		3\. 在开发板系统，进行挂载nfs
 
-三、通过vim开发linux
+​			mount -t nfs -o nolock 192.168.3.175:/home/hwusr/server/nfs /mnt
 
-1\. 编写代码
+​			192.168.3.175:/home/hwusr/server/nfs：为虚拟机的nfs路径
 
-vim test.c
 
-2\. 编译代码
 
-arm-linux-gnueabihf-gcc -o test test.c
+# 三、通过vim开发linux
 
-\-o test：表示编译完成生成的可执行文件名
+​	1\. 编写代码
 
-3\. 通过nfs或者scp传到开发板
+​		vim test.c
+
+​	2\. 编译代码
+
+​		arm-linux-gnueabihf-gcc -o test test.c
+
+​		\-o test：表示编译完成生成的可执行文件名
+
+​	3\. 通过nfs或者scp传到开发板
