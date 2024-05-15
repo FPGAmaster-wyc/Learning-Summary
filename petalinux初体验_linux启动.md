@@ -78,29 +78,29 @@
 
 ## 	7、制作启动镜像BOOT.bin文件（进入image文件夹）
 
-​			petalinux-package - -boot - -fsbl - -fpga - -u-boot - -force
+​		petalinux-package - -boot - -fsbl - -fpga - -u-boot - -force
 
-​				\- -boot：通过package命令生成BOOT.bin文件
+​			\- -boot：通过package命令生成BOOT.bin文件
 
-​				\- -fsbl： 指定fsbl镜像文件路径 zynq_fsbl.elf
+​			\- -fsbl： 指定fsbl镜像文件路径 zynq_fsbl.elf
 
-​				\- -fpga: 指定bit文件路径 system.bit
+​			\- -fpga: 指定bit文件路径 system.bit
 
-​				\- -u-boot：指定u-boot文件路径（用户程序路径） u-boot.elf
+​			\- -u-boot：指定u-boot文件路径（用户程序路径） u-boot.elf
 
-​				\- -force：强制覆盖（如果当前路径下面有.bin文件，则进行覆盖）
+​			\- -force：强制覆盖（如果当前路径下面有.bin文件，则进行覆盖）
 
 
 
-​			petalinux-package --boot --fsbl ./zynq_fsbl.elf --fpga ./system.bit --u-boot ./u-boot.elf --force（zynq）
+​		petalinux-package --boot --fsbl ./zynq_fsbl.elf --fpga ./system.bit --u-boot ./u-boot.elf --force（zynq）
 
-​			petalinux-package --boot --format BIN --fsbl ./zynqmp_fsbl.elf --u-boot ./u-boot.elf --pmufw ./pmufw.elf --fpga system.bit --force（zynqMP）
+​		petalinux-package --boot --format BIN --fsbl ./zynqmp_fsbl.elf --u-boot ./u-boot.elf --pmufw ./pmufw.elf --fpga system.bit --force（zynqMP）
 
 
 
 **FLASH启动的时候**：把内核和boot.src如果都放到BOOT里面的话，需要对地址进行分配
 
-​		petalinux-package --boot --force --format BIN --fsbl --pmufw --u-boot --kernel images/linux/Image --offset 0x1E40000 --cpu a53-0 --boot-script --offset 0x3E80000 --fpga path/to/bitstream.bit --offset-fpga 0x4000000
+​		petalinux-package --boot --force --format BIN --fsbl --fpga --pmufw --u-boot --kernel images/linux/Image --offset 0x1940000 --cpu a53-0 --boot-script --offset 0x3240000
 
 **FLASH启动ramdisk**：（即根文件系统也在FLASH）
 

@@ -4,7 +4,7 @@
 
 ​		1、进入petalinux工程目录外部运行petalinux-package命令
 
-​		2、\$ petalinux-package --bsp -p \<plnx-proj-root\> --output MY_BPS  \<plnx-proj-root\> ：为petalinux工程目录位置   MY_BPS ：为生成的BSP文件名
+​		2、\$ petalinux-package --bsp -p \<plnx-proj-root\> --output MY_BPS， \<plnx-proj-root\> ：为petalinux工程目录位置   MY_BPS ：为生成的BSP文件名
 
 ​		这将生成 MY.BSP， 包括来自指定工程的下列要素：  
 ​			• \<plnx-proj-root\>/project-spec/  
