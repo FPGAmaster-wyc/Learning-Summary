@@ -318,3 +318,72 @@
 ​	**6、然后把开发板设置为QSPI启动模式**
 
 ​		启动开发板，按一下复位按键，即可启动linux
+
+
+
+# 通过QSPI FLASH启动
+
+​	**petalinux2021.2版本**
+
+## 1、分配FLASH内存
+
+![image-20240515163312201](E:\my_work\petalinux-learning\${media}\image-20240515163312201.png)
+
+这里面的size，只是表示分区的存储大小，而不是起始地址
+
+## 2、修改kernel在FLASH的位置
+
+petalinux-config→ u-boot Configuration→ u-boot script configuration→ QSPI/OSPI image offsets
+
+![image-20240515163431495](E:\my_work\petalinux-learning\${media}\image-20240515163431495.png)
+
+0x1940000：0x1900000 + 0x40000  （根据第一步分区，进行计算），表示kernel的起始地址
+
+## 3、配置boot.scr的地址
+
+petalinux-config -c u-boot → ARM architecture → Boot script offset
+
+![image-20240515163810018](E:\my_work\petalinux-learning\${media}\image-20240515163810018.png)
+
+0x3240000：0x1900000 + 0x4000 + 0x1900000  ，表示boot.scr文件在FLASH中的位置
+
+## 4、打包生成BOOT.bin
+
+根据上述设置好的地址，打包成BOOT.bin （包含bit文件）
+
+![image-20240515164417894](E:\my_work\petalinux-learning\${media}\image-20240515164417894.png)
+
+```
+petalinux-package --boot --force --format BIN --fsbl --fpga --pmufw --u-boot --kernel images/linux/Image --offset 0x1940000 --cpu a53-0 --boot-script --offset 0x3240000
+```
+
+```
+--boot：指定要创建的镜像类型为引导镜像。
+--force：强制执行操作，即覆盖现有的输出文件。
+--format BIN：指定输出镜像的格式为二进制格式。
+--fsbl：将 FSBL（First Stage Boot Loader）添加到镜像中。
+--fpga：将 FPGA 位流文件添加到镜像中。
+--pmufw：将 PMU 固件添加到镜像中。
+--u-boot：将 U-Boot 添加到镜像中。
+--kernel images/linux/Image：指定 Linux 内核映像文件的路径。
+--offset 0x1940000：指定将内核映像文件添加到镜像时的偏移地址。
+--cpu a53-0：指定目标处理器核心。
+--boot-script：将引导脚本（boot script）添加到镜像中。
+--offset 0x3240000：指定将引导脚本添加到镜像时的偏移地址。
+```
+
+
+
+## 5、下板操作
+
+（1）首先用ramdisk版本，进入linux，把rootfs文件解压到emmc的ext4分区，（创建分区，参考petalinux_learning）
+
+```
+ tar xvf rootfs.tar.gz -C /media/rootfs
+```
+
+
+
+（2）把生成的BOOT.bin通过vitis，烧入到FLASH，（烧写之前，可以通过u-boot模式先把FLASH给擦除）
+
+​	擦除指令：sf erase 0 0x4000000	// 64MB内存
