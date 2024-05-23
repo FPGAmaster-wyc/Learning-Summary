@@ -24,6 +24,8 @@
 
 ​	petalinux-package 打包
 
+​	petalinux-build -x mrproper -f	清除生成的文件
+
 ​	首先source setting.sh，对petalinux环境进行配置（每次打开一个新的终端都需要配置）
 
 # petalinux流程例子：

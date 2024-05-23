@@ -19,7 +19,7 @@
 ​	（4）选择分区类型p		（也可以直接回车，默认）
 
 ​			Partition type
-​			   p   primary partition (1-4)  
+​			   p   primary partition (1-4) 
 ​			   e   extended
 
 ​	（5）输入分区号
