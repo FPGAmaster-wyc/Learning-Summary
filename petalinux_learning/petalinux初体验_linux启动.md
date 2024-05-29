@@ -104,9 +104,11 @@
 
 ​		petalinux-package --boot --force --format BIN --fsbl --fpga --pmufw --u-boot --kernel images/linux/Image --offset 0x1940000 --cpu a53-0 --boot-script --offset 0x3240000
 
-**FLASH启动ramdisk**：（即根文件系统也在FLASH）
+**FLASH启动ramdisk**：（即根文件系统也在FLASH）（需要修改根文件位置为INRD并配置地址）
 
-​		petalinux-package --boot --force --format BIN --fsbl --pmufw --u-boot --kernel images/linux/Image --offset 0x1E40000 --cpu a53-0 --boot-script --offset 0x3E80000 --add images/linux/rootfs.cpio.gz.u-boot --offset 0x4000000 --cpu a53-0 --file-attribute partition_owner=uboot
+```
+petalinux-package --boot --force --format BIN --fsbl --pmufw --u-boot --kernel images/linux/Image --offset 0x1E40000 --cpu a53-0 --boot-script --offset 0x3E80000 --add images/linux/rootfs.cpio.gz.u-boot --offset 0x4000000 --cpu a53-0 --file-attribute partition_owner=uboot
+```
 
 
 
@@ -124,7 +126,7 @@
 
 ​				将镜像文件（BOOT.bin、image.ub）拷贝到SD卡的FAT32分区，插入开发板启动
 
-​		**第二种：把SD卡分为两个分区FAT32和ext4，需要用linux系统操作**
+​		**第二种：把SD卡分为两个分区FAT32和ext4，需要用linux系统操作 **（zynqMP）
 
 ​				1、把BOOT.bin、Image、system.dtb文件放到FAT32分区
 
@@ -134,7 +136,9 @@
 
 ​			**把SD卡分为两个分区FAT32和ext4，需要用linux系统操作**
 
-​				1、把BOOT.BIN, boot.scr, Image, and ramdisk.cpio.gz.u-boot(MicroBlaze才需要) 放到FAT32分区		
+​				1、把BOOT.BIN, boot.scr, Image, and ramdisk.cpio.gz.u-boot(MicroBlaze才需要) 放到FAT32分区	（zynqMP）
+
+​					如果是zynq系列的话，需要把Image换成image.ub
 
 ​				2、把rootfs.tar.gz压缩包解压缩到ext4分区
 
@@ -147,3 +151,8 @@
 ​			petalinux-creat -t apps --template c -n first-app --enable （添加APP程序）
 
 ​			petalinux-creat -t modules -n first-modules --enable （添加驱动程序）
+
+
+
+# 设置网络IP：
+
