@@ -15,7 +15,7 @@
 ​			• \<plnx-proj-root\>/.gitignore  
 ​			• \<plnx-proj-root\>/components
 
-​		例子：\$ petalinux-package --bsp -p ./my-zed/ --output MY.BSP
+​		例子：\$ petalinux-package --bsp -p ./my-zed/ --output my-bsp
 
 
 
@@ -327,7 +327,7 @@
 
 ## 1、分配FLASH内存
 
-![image-20240515163312201](E:\my_work\petalinux-learning\${media}\image-20240515163312201.png)
+![image-20240515163312201](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240515163312201-1717468678256-1.png)
 
 这里面的size，只是表示分区的存储大小，而不是起始地址
 
@@ -335,7 +335,7 @@
 
 petalinux-config→ u-boot Configuration→ u-boot script configuration→ QSPI/OSPI image offsets
 
-![image-20240515163431495](E:\my_work\petalinux-learning\${media}\image-20240515163431495.png)
+![image-20240515163431495](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240515163431495-1717468684649-3.png)
 
 0x1940000：0x1900000 + 0x40000  （根据第一步分区，进行计算），表示kernel的起始地址
 
@@ -343,7 +343,7 @@ petalinux-config→ u-boot Configuration→ u-boot script configuration→ QSPI/
 
 petalinux-config -c u-boot → ARM architecture → Boot script offset
 
-![image-20240515163810018](E:\my_work\petalinux-learning\${media}\image-20240515163810018.png)
+![image-20240515163810018](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240515163810018-1717468690147-5.png)
 
 0x3240000：0x1900000 + 0x4000 + 0x1900000  ，表示boot.scr文件在FLASH中的位置
 
@@ -351,7 +351,7 @@ petalinux-config -c u-boot → ARM architecture → Boot script offset
 
 根据上述设置好的地址，打包成BOOT.bin （包含bit文件）
 
-![image-20240515164417894](E:\my_work\petalinux-learning\${media}\image-20240515164417894.png)
+![image-20240515164417894](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240515164417894-1717468694660-7.png)
 
 ```
 petalinux-package --boot --force --format BIN --fsbl --fpga --pmufw --u-boot --kernel images/linux/Image --offset 0x1940000 --cpu a53-0 --boot-script --offset 0x3240000
@@ -387,3 +387,7 @@ petalinux-package --boot --force --format BIN --fsbl --fpga --pmufw --u-boot --k
 （2）把生成的BOOT.bin通过vitis，烧入到FLASH，（烧写之前，可以通过u-boot模式先把FLASH给擦除）
 
 ​	擦除指令：sf erase 0 0x4000000	// 64MB内存
+
+## 参考文献：
+
+https://support.xilinx.com/s/article/000033588?language=en_US

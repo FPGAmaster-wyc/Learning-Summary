@@ -13,7 +13,7 @@
 
 ZYNQMP_CONSOLE=cadence1
 
- 
+ /components/yocto/source/aarch64/layers/meta-petalinux/recipes-core/packagegroups/packagegroup-petalinux-gstreamer.bb  查询rootfs包里面的东西
 
 $cat QSPI_R5_0.bif
 the_ROM_image:

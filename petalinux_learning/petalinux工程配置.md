@@ -155,7 +155,7 @@ Firmware Version Configuration ---\> ：配置工程名字（几乎没用）
 
                             /home/peta19/sstate_2019.2/aarch64
 
-                            /home/peta21/sstate_petalinux/aarch64
+                            /home/peta21/sstate_petalinux/aarch64
 
 
 

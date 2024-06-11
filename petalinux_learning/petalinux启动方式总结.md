@@ -161,41 +161,45 @@ petalinux-package --boot --force --format BIN --fsbl --fpga --pmufw --u-boot --k
 
 ​	擦除指令：sf erase 0 0x4000000	// 64MB内存
 
+## 参考文献：
+
+FLASH分区配置：https://support.xilinx.com/s/article/000033588?language=en_US
 
 
-# ramdisk启动：
+
+# ramdisk启动（INITRAMFS）：
 
 petalinux-config配置：
 
 ​	配置FLASH内存：
 
-![image-20240529155329172](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240529155329172.png)
+![image-20240605145504739](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240605145504739.png)
 
 ​	配置根文件类型和地址：
 
-![image-20240529155440963](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240529155440963.png)
+![image-20240605145417889](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240605145417889.png)
 
 同时还要修改boot.scr地址（FLASH启动有介绍）
 
 然后petalinux-build
 
-打包BOOT.bin
+打包BOOT.bin  （boot、iamge.ub、boot.scr）
 
-```
-petalinux-package --boot --force --format BIN --fsbl  --u-boot --kernel images/linux/Image --offset 0x520000 --cpu a53-0 --boot-script --offset 0x540000 --add images/linux/rootfs.cpio.gz.u-boot --offset 0x1440000 --cpu a53-0 --file-attribute partition_owner=uboot
+```shell
+petalinux-package --boot --force --format BIN --fsbl --pmufw --u-boot --kernel images/linux/image.ub --offset 0x240000 --cpu a53-0 --boot-script --offset 0x1840000
 ```
 
 然后把BOOT.bin 存储到FLASH即可
 
-
+**说明：**此时的image.ub是包含了一个简单的根文件系统的，所以不需要再进行打包根文件系统
 
 # FLASH配合EMMC启动：
 
-ramdisk启动一个最简单的系统（主要做mmc配置）：
+ramdisk启动一个最简单的系统（主要做mmc配置）：[ramdisk启动](#ramdisk启动（INITRAMFS）：)
 
-​	然后把mmc分为两个区
+​	然后把mmc分为两个区并把内核和根文件系统存进去
 
-​		FAT32：存储image.ub
+​		FAT32：存储image.ub，system.dtb
 
 ​		ext4：存储根文件系统
 
@@ -244,7 +248,9 @@ mmc dev 1
 修改启动内核环境变量
 
 ```cobol
-setenv my_emmc_boot "mmc dev 1:1 && load mmc 1:1 0x10000000 /image.ub && bootm 0x10000000"
+setenv my_emmc_boot "mmc dev 0:1 && load mmc 0:1 0x10000000 /image.ub && bootm 0x10000000"
+setenv run_emmc_bit "mmc dev 0:1 && load mmc 0:1 ${loadbit_addr} system.bit && fpga loadb 0 ${loadbit_addr} ${filesize}"
+
 ```
 
 将bootcmd的命令修改成my_emmc_boot

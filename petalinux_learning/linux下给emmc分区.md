@@ -32,11 +32,11 @@
 ​		Last sector, +sectors or +size{K,M,G} (2048-31116287, default 31116287): 31116287 
 
 ​	（8）打印分区情况 p
-​	（9）修改分区类型 t		（83为根文件系统分区类型，b为FAT32）
+​	（9）修改分区类型 t		（83为根文件系统分区类型，0C为FAT32）
 ​	（10）保存并退出 w	
 ​	
 
 5、记得格式化一下分区
-	 mkfs.ext4 /dev/mmcblk0p1 	RXT4
-	 mkdosfs /dev/mmcblk0p1    	FAT32
+	 mkfs.ext4 /dev/mmcblk0p2 	EXT4
+	 mkfs.vfat /dev/mmcblk0p1    	FAT32
 	 
