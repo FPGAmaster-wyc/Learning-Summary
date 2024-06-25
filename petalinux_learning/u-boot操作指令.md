@@ -100,7 +100,7 @@ System Volume Information/
 ## 下载USB - u盘文件：
 
 ```shell
-load usb 0 ${loadaddr} system.bit
+load usb 0 0x10000000 system.bit
 ```
 
 
