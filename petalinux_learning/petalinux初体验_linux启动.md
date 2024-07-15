@@ -92,11 +92,15 @@
 
 ​			\- -force：强制覆盖（如果当前路径下面有.bin文件，则进行覆盖）
 
+```shell
+## zynq
+petalinux-package --boot --fsbl ./zynq_fsbl.elf --fpga ./system.bit --u-boot ./u-boot.elf --force
+petalinux-package --boot --fsbl --fpga --u-boot --force
 
-
-​		petalinux-package --boot --fsbl ./zynq_fsbl.elf --fpga ./system.bit --u-boot ./u-boot.elf --force（zynq）
-
-​		petalinux-package --boot --format BIN --fsbl ./zynqmp_fsbl.elf --u-boot ./u-boot.elf --pmufw ./pmufw.elf --fpga system.bit --force（zynqMP）
+## zynqMP
+petalinux-package --boot --format BIN --fsbl --u-boot --pmufw --fpga --force
+petalinux-package --boot --format BIN --fsbl ./zynqmp_fsbl.elf --u-boot ./u-boot.elf --pmufw ./pmufw.elf --fpga system.bit --force
+```
 
 
 
@@ -122,7 +126,7 @@ petalinux-package --boot --force --format BIN --fsbl --pmufw --u-boot --kernel i
 
 ​				1、BOOT.bin（fsbl镜像文件、bit流文件、u-boot文件）
 
-​				2、image.ub（kernel、设备树、rootfs）
+​				2、image.ub（kernel、设备树、rootfs）或者（uImage + system.dtb）
 
 ​				将镜像文件（BOOT.bin、image.ub）拷贝到SD卡的FAT32分区，插入开发板启动
 
@@ -138,7 +142,7 @@ petalinux-package --boot --force --format BIN --fsbl --pmufw --u-boot --kernel i
 
 ​				1、把BOOT.BIN, boot.scr, Image, and ramdisk.cpio.gz.u-boot(MicroBlaze才需要) 放到FAT32分区	（zynqMP）
 
-​					如果是zynq系列的话，需要把Image换成image.ub
+​					如果是zynq系列的话，需要把Image换成uImage，image.ub
 
 ​				2、把rootfs.tar.gz压缩包解压缩到ext4分区
 

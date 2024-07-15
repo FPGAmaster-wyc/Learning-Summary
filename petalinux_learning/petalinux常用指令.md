@@ -1,3 +1,81 @@
+# 自己总结：
+
+## 查询rootfs大包里面包含的东西路径：
+
+ /components/yocto/source/aarch64/layers/meta-petalinux/recipes-core/packagegroups/packagegroup-petalinux-gstreamer.bb  
+
+## 在 PetaLinux 中，你还可以单独编译其他的组件,包括:
+
+1. u-boot:
+
+   复制
+
+   ```shell
+   petalinux-build -c u-boot
+   ```
+
+   编译 U-Boot 引导程序。
+
+2. linux:
+
+   复制
+
+   ```shell
+   petalinux-build -c linux
+   ```
+
+   编译 Linux 内核。
+
+3. device-tree:
+
+   复制
+
+   ```shell
+   petalinux-build -c device-tree
+   ```
+
+   编译设备树。
+
+4. rootfs:
+
+   复制
+
+   ```shell
+   petalinux-build -c rootfs
+   ```
+
+   编译根文件系统。
+
+5. apl:
+
+   复制
+
+   ```shell
+   petalinux-build -c apl
+   ```
+
+   编译应用程序层。
+
+6. bootloader:
+
+   复制
+
+   ```shell
+   petalinux-build -c bootloader
+   ```
+
+   编译引导加载程序(包括 FSBL 和 U-Boot)。
+
+
+
+
+
+
+
+
+
+# 网上总结：
+
 #source settings.sh
 
 #source components/yocto/source/aarch64/environment-setup-aarch64-xilinx-linux
@@ -13,7 +91,7 @@
 
 ZYNQMP_CONSOLE=cadence1
 
- /components/yocto/source/aarch64/layers/meta-petalinux/recipes-core/packagegroups/packagegroup-petalinux-gstreamer.bb  查询rootfs包里面的东西
+
 
 $cat QSPI_R5_0.bif
 the_ROM_image:

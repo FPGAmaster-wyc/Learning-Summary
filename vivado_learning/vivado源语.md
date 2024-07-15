@@ -30,3 +30,13 @@ set_property C_USER_SCAN_CHAIN 1 [get_debug_cores dbg_hub]
 connect_debug_port dbg_hub/clk [get_nets lvds_clk] （lvds_clk需要修改为你ila的时钟）
 ```
 
+
+
+# FLASH速度等级：
+
+set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4 [current_design]
+set_property CONFIG_MODE SPIx4 [current_design]
+
+**说明：**
+
+在固化FLASH的时候，就可以选择SPI x4
