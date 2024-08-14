@@ -2,25 +2,42 @@
 
 ## 1、安装网络工具包
 
+```shell
 sudo apt install net-tools
+```
+
+
 
 ## 2、安装SSH服务
 
+```shell 
  sudo apt update
 
  sudo apt install openssh-server
+```
+
+
 
 ## 3、更换国内镜像源
 
- 1） 备份---sudo cp /etc/apt/sources.list /etc/apt/[sources.list.back](http://sources.list.back/)
+```shell
+ ## 1） 备份---
+ sudo cp /etc/apt/sources.list /etc/apt/[sources.list.back](http://sources.list.back/)
 
-2）修改源---sudo vim /etc/apt/sources.list （从网上找到国内源）
+## 2）修改源---
+sudo vim /etc/apt/sources.list （从网上找到国内源）
 
- 3） 更新---sudo apt-get update
+ ## 3） 更新---
+ sudo apt-get update
+```
 
-## 4、在线安装VMware tools
 
-​     sudo apt-get install open-vm-tools-desktop -y （谨慎使用）
+
+##  4、在线安装VMware tools
+
+```shell
+sudo apt-get install open-vm-tools-desktop -y
+```
 
  
 
@@ -34,15 +51,27 @@ sudo apt install net-tools
 
 ​     eg：scp file.txt user@10.0.0.1:/home/user/
 
-## 解压文件
+## 解压解压文件
 
-​     tar -zxvf 文件名.tar.gz
+**压缩**
 
-​     eg：tar -zxvf Xilinx_Vivado_Vitis_Update_2021.1.1_0728_1534.tar.gz
+```shell
+sudo tar -czvf test_contents.tar.gz -C /path/to/test .
+```
 
-​     unzip 文件名.zip
+**解压**     
+
+```shell
+tar -zxvf 文件名.tar.gz
+
+eg：tar -zxvf Xilinx_Vivado_Vitis_Update_2021.1.1_0728_1534.tar.gz
+
+unzip 文件名.zip
 
 eg：unzip lvds.zip
+```
+
+
 
  
 
@@ -96,9 +125,17 @@ sudo mv vivado-launcher.sh vivado （在脚本文件夹内操作）
 
 ## 复制文件
 
+```shell
 cp -r ./test ./down  把test文件夹及其里面的内容，复制到down
+```
 
  
+
+## 修改简短密码
+
+```shell
+sudo passwd username
+```
 
  
 

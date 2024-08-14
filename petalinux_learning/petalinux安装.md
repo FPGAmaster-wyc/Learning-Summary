@@ -49,3 +49,28 @@ sudo apt install fish
 ## 6、petalinux设计流程
 
 ![](media/b91045ef35608a688f1534407281fc43.png)
+
+
+
+
+
+
+
+# vivado安装
+
+## 安装
+
+直接运行./xsetup
+
+## 卸载
+
+进入下面目录：
+
+/2019.2/.xinstall/Vivado_2019.2
+
+然后卸载
+
+sudo ./xsetup -b Uninstall
+
+
+
