@@ -139,8 +139,28 @@ sudo passwd username
 
  
 
- 
+##  创建快捷方式
 
- 
+手动创建 vivado18_lab.desktop
 
- 
+创建快捷方式  vivado18_lab.desktop 到 /usr/share/applications 中
+
+```shell
+cd /usr/share/applications
+sudo vim vivado18_lab.desktop
+```
+
+ 在Vim中打开vivado18_lab.desktop空文件，按i进行编辑。输入一下文字
+
+```tcl
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Type=Application		 # 快捷方式类型
+Terminal=false			# 是否启用终端
+Exec=/snap/bin/skype	# 应用程序的执行路径	
+Name=Skype				# 软件名字
+Comment=Skype			#对该应用程序的简短描述
+Icon=/snap/skype/101/meta/gui/skypeforlinux.png		# 显示出的图标
+```
+

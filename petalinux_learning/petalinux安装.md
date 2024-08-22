@@ -14,25 +14,37 @@ sudo apt install fish
 
 ## 1、安装依赖项
 
-        sudo apt install build-essential vim tofrodos
+```shell
+sudo apt install build-essential vim tofrodos
 
-        sudo apt install iproute2 gawk gcc git make net-tools zlib1g-dev
+sudo apt install iproute2 gawk gcc git make net-tools zlib1g-dev
 
-        sudo apt install libssl-dev flex bison libselinux1 libncurses5-dev
+sudo apt install libssl-dev flex bison libselinux1 libncurses5-dev
 
-        sudo apt install tftpd lib32z1 lib32ncurses5 libbz2-1.0:i386
+sudo apt install tftpd lib32z1 lib32ncurses5 libbz2-1.0:i386
 
-        sudo apt install lib32stdc++6 xvfb chrpath socat autoconf libtool
+sudo apt install lib32stdc++6 xvfb chrpath socat autoconf libtool
 
-        sudo apt install texinfo gcc-multilib libsdl1.2-dev libglib2.0-dev zlib1g:i386
+sudo apt install texinfo gcc-multilib libsdl1.2-dev libglib2.0-dev zlib1g:i386
+
+sudo apt-get install -y gcc git make net-tools libncurses5-dev tftpd zlib1g-dev libssl-dev flex bison libselinux1 gnupg wget diffstat chrpath socat xterm autoconf libtool tar unzip texinfo zlib1g-dev gcc-multilib build-essential zlib1g:i386 screen pax gzip
+
+sudo apt-get install tofrodos iproute2 gawk make net-tools libncurses5-dev tftpd zlib1g libssl-dev flex bison libselinux1 gnupg wget diffstat chrpath socat xterm autoconf libtool tar unzip texinfo zlib1g-dev gcc-multilib build-essential screen pax gzip python 2.7.5 zlib1g:i386
+```
+
+
 
 ## 2、修改.run文件的属性
 
-        chmod a+x petalinux.run
+chmod a+x ppetalinux-v2019.2-final-installer.run
 
 ## 3、安装petalinux安装到当前文件夹下的v2019.2里面
 
-        ./ petalinux.run ./v2019.2
+./petalinux-v2019.2-final-installer.run ./petalinux
+
+> 安装过程会弹出协议，按“q” 跳
+>
+> 过详情，然后输入“y” 表示同意协议内容
 
 ## 4、修改到bash
 
