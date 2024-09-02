@@ -68,7 +68,7 @@ chmod a+x ppetalinux-v2019.2-final-installer.run
 
 
 
-# vivado安装
+# vivado安装和vivado卸载
 
 ## 安装
 
