@@ -26,25 +26,25 @@
 
     Esc：连续按2次，返回的意思，和Exit一样
 
-# 二、字符图形化配置界面中的三种配置项
+# 二、字符图形化配置
 
-## 1\. 使能/禁止配置项 （符号：[ ]）
+**1\. 使能/禁止配置项 （符号：[ ]）**
 
         2选1，要么使能它，要么禁用它，用空格进行切换
 
         [ ] （\*：使能 空：禁止）
 
-## 2\. 多选一配置项 （符号：后面有（））
+**2\. 多选一配置项 （符号：后面有（））**
 
         必须选择其中一个配置
 
         配置项字符串后面有一个小括号，括号里面就是选择的配置值
 
-## 3\. 可编辑的配置项（符号：前面有（））
+**3\. 可编辑的配置项（符号：前面有（））**
 
         配置项字符串前面有一个小括号，可以自己编辑配置值，小括号里面对应当前配置值
 
-# 三、petalinux-config工程配置项介绍
+# 三、config配置项
 
 Linux Components Selection ---\>
 
@@ -134,28 +134,35 @@ Firmware Version Configuration ---\> ：配置工程名字（几乎没用）
 
 
 
+## 离线包配置
+
 <mark>Yocto Settings ---\> （petalinux的底层就是Yocto ）（主要设置离线包）</mark>
 
-    Add pre-mirror url ---\> （离线编译包download）
+Add pre-mirror url ---\> （离线编译包download）
 
-            修改为file://\<path\>/downloads，\<path\>为sstate下载包解压后的地址。
+修改为file://\<path\>/downloads，\<path\>为sstate下载包解压后的地址。
 
-                例如：file:///home/peta19/sstate_2019.2/downloads
+```tcl
+## downloads
+file:///home/peta19/sstate_2019.2/downloads
 
-                            file:///home/peta18/sstate2018/sstate-rel-v2018.3
+file:///home/peta18/sstate2018/sstate-rel-v2018.3
 
-                            file:///home/peta21/sstate_petalinux/downloads
+file:///home/peta21/sstate_petalinux/downloads
 
-                原本：http://petalinux.xilinx.com/sswreleases/rel-v\${PETALINUX_VER%%.\*}/downloads
+原本：http://petalinux.xilinx.com/sswreleases/rel-v\${PETALINUX_VER%%.\*}/downloads
+```
 
     Local sstate feeds settings ---\> （离线下载包sstate，zynq是arm，zynqMP是aach64）
 
-            修改为：\<path\>/aarch64(arm/mb-full)，\<path\>为sstate下载包解压后的地址。  
-                例如：/home/peta18/sstate2018/sstate-rel-v2018.3
+```tcl
+## sstate
+/home/peta18/sstate2018/sstate-rel-v2018.3
 
-                            /home/peta19/sstate_2019.2/aarch64
+/home/peta19/sstate_2019.2/aarch64
 
-                            /home/peta21/sstate_petalinux/aarch64
+/home/peta21/sstate_petalinux/aarch64
+```
 
 
 
