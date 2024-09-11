@@ -8,62 +8,50 @@
 
 1. u-boot:
 
-   复制
-
    ```shell
-   petalinux-build -c u-boot
+petalinux-build -c u-boot
    ```
-
+   
    编译 U-Boot 引导程序。
 
 2. linux:
 
-   复制
-
    ```shell
-   petalinux-build -c linux
+petalinux-build -c linux
    ```
-
+   
    编译 Linux 内核。
 
 3. device-tree:
 
-   复制
-
    ```shell
-   petalinux-build -c device-tree
+petalinux-build -c device-tree
    ```
-
+   
    编译设备树。
 
 4. rootfs:
 
-   复制
-
    ```shell
-   petalinux-build -c rootfs
+petalinux-build -c rootfs
    ```
-
+   
    编译根文件系统。
 
 5. apl:
 
-   复制
-
    ```shell
-   petalinux-build -c apl
+petalinux-build -c apl
    ```
-
+   
    编译应用程序层。
 
 6. bootloader:
 
-   复制
-
    ```shell
    petalinux-build -c bootloader
    ```
-
+   
    编译引导加载程序(包括 FSBL 和 U-Boot)。
 
 
