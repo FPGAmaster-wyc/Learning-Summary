@@ -115,11 +115,15 @@ sudo mv vivado-launcher.sh vivado （在脚本文件夹内操作）
 
 ## 格式化内存卡
 
-首先查看名称： $ df
+```shell
+## EXT4
+mkfs.ext4 /dev/mmcblk0p2
 
-然后卸载内存卡 $ sudo umount /dev/sdb2
+## FAT32
+mkfs.vfat /dev/mmcblk0p1
+```
 
-然后格式化内存卡：$ sudo mkfs.ext4 /dev/ sdb2  (.ext4、.fat)
+​	 
 
 
 

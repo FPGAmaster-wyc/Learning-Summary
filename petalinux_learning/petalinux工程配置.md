@@ -146,7 +146,7 @@ Add pre-mirror url ---\> （离线编译包download）
 ## downloads
 file:///home/peta19/sstate_2019.2/downloads
 
-file:///home/peta18/sstate2018/sstate-rel-v2018.3
+file:///home/peta18/sstate2018/downloads
 
 file:///home/peta21/sstate_petalinux/downloads
 
@@ -157,7 +157,7 @@ file:///home/peta21/sstate_petalinux/downloads
 
 ```tcl
 ## sstate
-/home/peta18/sstate2018/sstate-rel-v2018.3
+/home/peta18/sstate2018/arm
 
 /home/peta19/sstate_2019.2/aarch64
 
