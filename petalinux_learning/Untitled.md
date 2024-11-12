@@ -36,7 +36,7 @@
 
 
 
-![image-20240627094730186](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240627094730186.png)
+![image-20240627094730186](F:\my_work\Learning-Summary\petalinux_learning\media\image-20240627094730186.png)
 
 ![image-20240627094737467](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240627094737467.png)
 

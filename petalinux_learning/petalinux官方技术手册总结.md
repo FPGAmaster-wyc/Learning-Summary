@@ -327,7 +327,7 @@
 
 ## 1、分配FLASH内存
 
-![image-20240515163312201](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240515163312201-1717468678256-1.png)
+![image-20240515163312201](F:\my_work\Learning-Summary\petalinux_learning\media\image-20240515163312201-1717468678256-1.png)
 
 这里面的size，只是表示分区的存储大小，而不是起始地址
 
@@ -335,7 +335,7 @@
 
 petalinux-config→ u-boot Configuration→ u-boot script configuration→ QSPI/OSPI image offsets
 
-![image-20240515163431495](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240515163431495-1717468684649-3.png)
+![image-20240515163431495](F:\my_work\Learning-Summary\petalinux_learning\media\image-20240515163431495-1717468684649-3.png)
 
 0x1940000：0x1900000 + 0x40000  （根据第一步分区，进行计算），表示kernel的起始地址
 
@@ -343,7 +343,7 @@ petalinux-config→ u-boot Configuration→ u-boot script configuration→ QSPI/
 
 petalinux-config -c u-boot → ARM architecture → Boot script offset
 
-![image-20240515163810018](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240515163810018-1717468690147-5.png)
+![image-20240515163810018](F:\my_work\Learning-Summary\petalinux_learning\media\image-20240515163810018-1717468690147-5.png)
 
 0x3240000：0x1900000 + 0x4000 + 0x1900000  ，表示boot.scr文件在FLASH中的位置
 

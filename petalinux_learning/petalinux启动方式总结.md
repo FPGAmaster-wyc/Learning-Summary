@@ -4,7 +4,7 @@
 
 Boot ROM → **fsbl（fsbl.elf） → bitstream（system.bit）→ u-boot（u-boot.elf）** → bootscr（boot.scr）→ kernel（Image）→ device tree（system.dtb）→ rootfs 
 
-![image-20240516150753985](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240516150753985.png)
+![image-20240516150753985](./media/image-20240516150753985-1731317773117-4.png)
 
 ​	Boot ROM：直接固化在zynq硬件，开发者无法修改，启动模式是在这里设置（QSPI，SD，JTAG）
 
@@ -40,7 +40,7 @@ Zynq 的具体启动配置是分级进行的，一共可以分为3个阶段，�
 
 读取启动方式的MIO引脚（JTAG、QSPI、SD）
 
-​	![image-20240516155334514](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240516155334514.png)
+​	![image-20240516155334514](./media/image-20240516155334514-1731317776241-6.png)
 
 **全程在PS端完成！**
 
@@ -54,13 +54,13 @@ Zynq 的具体启动配置是分级进行的，一共可以分为3个阶段，�
 
 4. 跳转执行 SSBL 或裸跑程序
 
-   ![image-20240516155745808](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240516155745808.png)
+   ![image-20240516155745808](./media/image-20240516155745808-1731317778534-8.png)
 
 **SSBL （Second Stage Boot loader）阶段：**
 
 裸机不需要到这一步，这一步主要是用来运行操作系统
 
-![image-20240516160234318](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240516160234318.png)
+![image-20240516160234318](./media/image-20240516160234318-1731317780334-10.png)
 
 # SD卡启动
 
@@ -90,7 +90,7 @@ Zynq 的具体启动配置是分级进行的，一共可以分为3个阶段，�
 
 ​			选择设备名称：/dev/sdblk0p1   （根据自己的情况填写）
 
-![image-20240516170910272](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240516170910272.png)
+![image-20240516170910272](./media/image-20240516170910272-1731317782702-12.png)
 
 
 
@@ -100,7 +100,7 @@ Zynq 的具体启动配置是分级进行的，一共可以分为3个阶段，�
 
 ## 1、分配FLASH内存
 
-![image-20240515163312201](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240515163312201.png)
+![image-20240515163312201](./media/image-20240515163312201-1731317784766-14.png)
 
 这里面的size，只是表示分区的存储大小，而不是起始地址
 
@@ -108,7 +108,7 @@ Zynq 的具体启动配置是分级进行的，一共可以分为3个阶段，�
 
 petalinux-config→ u-boot Configuration→ u-boot script configuration→ QSPI/OSPI image offsets
 
-![image-20240515163431495](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240515163431495.png)
+![image-20240515163431495](./media/image-20240515163431495-1731317789150-16.png)
 
 0x1940000：0x1900000 + 0x40000  （根据第一步分区，进行计算），表示kernel的起始地址
 
@@ -116,7 +116,7 @@ petalinux-config→ u-boot Configuration→ u-boot script configuration→ QSPI/
 
 petalinux-config -c u-boot → ARM architecture → Boot script offset
 
-![image-20240515163810018](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240515163810018.png)
+![image-20240515163810018](./media/image-20240515163810018-1731317793039-18.png)
 
 0x3240000：0x1900000 + 0x4000 + 0x1900000  ，表示boot.scr文件在FLASH中的位置
 
@@ -124,7 +124,7 @@ petalinux-config -c u-boot → ARM architecture → Boot script offset
 
 根据上述设置好的地址，打包成BOOT.bin （包含bit文件）
 
-![image-20240515164417894](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240515164417894.png)
+![image-20240515164417894](./media/image-20240515164417894-1731317797790-20.png)
 
 ```
 petalinux-package --boot --force --format BIN --fsbl --fpga --pmufw --u-boot --kernel images/linux/Image --offset 0x1940000 --cpu a53-0 --boot-script --offset 0x3240000
@@ -173,11 +173,11 @@ petalinux-config配置：
 
 ​	配置FLASH内存：
 
-![image-20240605145504739](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240605145504739.png)
+![image-20240605145504739](./media/image-20240605145504739-1731317801086-22.png)
 
 ​	配置根文件类型和地址：
 
-![image-20240605145417889](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240605145417889.png)
+![image-20240605145417889](./media/image-20240605145417889-1731317803166-24.png)
 
 同时还要修改boot.scr地址（FLASH启动有介绍）
 
@@ -205,11 +205,11 @@ ramdisk启动一个最简单的系统（主要做mmc配置）：[ramdisk启动](
 
 存储完之后，然后再修改rootfs的类型为SD卡，并且指向mmc的ext4分区
 
-![image-20240529160003446](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240529160003446.png)
+![image-20240529160003446](./media/image-20240529160003446-1731317805371-26.png)
 
 同时SD卡也要切换为MMC的sd1：
 
-![image-20240529160801485](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240529160801485.png)
+![image-20240529160801485](./media/image-20240529160801485-1731317806954-28.png)
 
 然后打包BOOT.bin，并烧写到FLASH
 
@@ -229,7 +229,7 @@ print bootcmd
 
 原本的变量：
 
-![image-20240529150209825](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240529150209825.png)
+![image-20240529150209825](./media/image-20240529150209825-1731317809120-30.png)
 
 查看iamge.ub文件
 
@@ -237,7 +237,7 @@ print bootcmd
 ls emm 1:1
 ```
 
-![image-20240529160249469](E:\my_work\Learning-Summary\petalinux_learning\media\image-20240529160249469.png)
+![image-20240529160249469](F:\my_work\Learning-Summary\petalinux_learning\media\image-20240529160249469.png)
 
 挂载emmc1
 
@@ -250,7 +250,6 @@ mmc dev 1
 ```cobol
 setenv my_emmc_boot "mmc dev 0:1 && load mmc 0:1 0x10000000 /image.ub && bootm 0x10000000"
 setenv run_emmc_bit "mmc dev 0:1 && load mmc 0:1 ${loadbit_addr} system.bit && fpga loadb 0 ${loadbit_addr} ${filesize}"
-
 ```
 
 将bootcmd的命令修改成my_emmc_boot
